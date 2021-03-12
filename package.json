@@ -4,6 +4,7 @@
   "description": "'Inter-process communication' Allows you to communicate with background processes.",
   "keywords": [
     "ipc",
+    "function",
     "net",
     "child",
     "worker",
@@ -11,7 +12,7 @@
     "channel",
     "parallel",
     "multithreading",
-    "Non-blocking",
+    "non-blocking",
     "background",
     "processes"
   ],

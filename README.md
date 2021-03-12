@@ -1,5 +1,8 @@
 # ipc-fn: a Node.js Inter Process Communication library
 
+[![npm-version](https://badgen.net/npm/v/ipc-fn)](https://www.npmjs.com/package/ipc-fn)
+[![npm-total-downloads](https://badgen.net/npm/dw/ipc-fn)](https://www.npmjs.com/package/ipc-fn)
+
 'ipc-fn' *Inter Process Communication* is a simple to use.
 Allows you to easily run part of the code as a background process. 
 
