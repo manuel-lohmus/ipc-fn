@@ -1,6 +1,6 @@
 {
   "name": "ipc-fn",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "'Inter-process communication' Allows you to communicate with background processes.",
   "keywords": [
     "ipc",
@@ -34,5 +34,10 @@
     "README.md",
     "README.html",
     "LICENSE"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manuel-lohmus/ipc-fn.git"
+  },
+  "homepage": "https://github.com/manuel-lohmus/ipc-fn#readme"
 }
