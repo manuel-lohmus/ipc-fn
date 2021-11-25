@@ -1,6 +1,6 @@
 {
   "name": "ipc-fn",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "'Inter-process communication' Allows you to communicate with background processes.",
   "keywords": [
     "ipc",
@@ -17,6 +17,7 @@
     "processes"
   ],
   "main": "index.min.js",
+  "browser": "browser.js",
   "license": "MIT",
   "bugs": {
     "email": "manuel@hauss.ee"
@@ -29,6 +30,7 @@
     "start": "node index.min.js"
   },
   "files": [
+    "browser.js",
     "index.js",
     "index.min.js",
     "package.json",

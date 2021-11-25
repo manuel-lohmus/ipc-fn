@@ -1,41 +1,42 @@
-# ipc-fn: a Node.js Inter Process Communication library
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ipc-fn: a Node.js Inter Process Communication library</title>
+</head>
+<body>
 
-[![npm-version](https://badgen.net/npm/v/ipc-fn)](https://www.npmjs.com/package/ipc-fn)
-[![npm-week-downloads](https://badgen.net/npm/dw/ipc-fn)](https://www.npmjs.com/package/ipc-fn)
-
-'ipc-fn' *Inter Process Communication* is a simple to use.
-Allows you to easily run part of the code as a background process. 
-
-Applications:
--	Existing code and you want to run part of it as a background process
--	Non-blocking web server
--	Multithreading app
-
-
-## Table of Contents
-
-- [Installing](#installing)
-- [Usage examples](#usage-examples)
-  - [Child process](#child-process)
-  - [Net (TCP servce and clients)](#net-tcp-servce-and-clients)
-  - [Worker](#worker)
-  - [Broadcast Channel](#broadcast-channel)
-  - [Non-blocking web server](#non-blocking-web-server)
-- [License](#license)
-
-## Installing
-
-```
-npm install ipc-fn
-```
-
-## Usage examples
-
-### Child process
-
-child.js
-```js
-'use strict';
+    <h1 id="ipc-fn-a-node.js-inter-process-communication-library">ipc-fn: a Node.js Inter Process Communication library</h1>
+<p><a href="https://www.npmjs.com/package/ipc-fn"><img src="https://badgen.net/npm/v/ipc-fn" alt="npm-version" /></a>
+<a href="https://www.npmjs.com/package/ipc-fn"><img src="https://badgen.net/npm/dw/ipc-fn" alt="npm-week-downloads" /></a></p>
+<p>'ipc-fn' <em>Inter Process Communication</em> is a simple to use.
+Allows you to easily run part of the code as a background process.</p>
+<p>Applications:</p>
+<ul>
+<li>Existing code and you want to run part of it as a background process</li>
+<li>Non-blocking web server</li>
+<li>Multithreading app</li>
+</ul>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#installing">Installing</a></li>
+<li><a href="#usage-examples">Usage examples</a>
+<ul>
+<li><a href="#child-process">Child process</a></li>
+<li><a href="#net-tcp-servce-and-clients">Net (TCP servce and clients)</a></li>
+<li><a href="#worker">Worker</a></li>
+<li><a href="#broadcast-channel">Broadcast Channel</a></li>
+<li><a href="#non-blocking-web-server">Non-blocking web server</a></li>
+</ul>
+</li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="installing">Installing</h2>
+<pre><code>npm install ipc-fn
+</code></pre>
+<h2 id="usage-examples">Usage examples</h2>
+<h3 id="child-process">Child process</h3>
+<p>child.js</p>
+<pre><code class="language-js">'use strict';
 var ipc = require('ipc-fn');
 
 function print(input) {
@@ -55,14 +56,12 @@ exports.shutdown = shutdown;
 ipc.childBackground(exports);
 
 process.on('exit', function () { console.log('Exit: ' + workerName); });
-```
-
-test_child.js
-```js
-'use strict';
+</code></pre>
+<p>test_child.js</p>
+<pre><code class="language-js">'use strict';
 var ipc = require('ipc-fn');
 var ipc = require('./index.js');
-var cp = require("child_process");
+var cp = require(&quot;child_process&quot;);
 var fork = cp.fork('./child.js');
 var child = ipc.childInterface(require('./child.js'), fork);
 
@@ -74,12 +73,9 @@ console.log({
 
 child.print('Test1');
 setTimeout(function () { child.shutdown(); }, 10000);
-```
-
-### Net (TCP servce and clients)
-
-```js
-'use strict';
+</code></pre>
+<h3 id="net-tcp-servce-and-clients">Net (TCP servce and clients)</h3>
+<pre><code class="language-js">'use strict';
 var wt = require('worker_threads');
 var ipc = require('ipc-fn');
 var ipcPort = 8021;
@@ -117,7 +113,7 @@ if (wt.isMainThread) {
     var worker3 = new wt.Worker('./test_net.js', { workerData: 'client' });
     var fns = ipc.netInterface(exports, ipcPort);
 
-    setTimeout(function () { fns.print("Main thread test. " + workerName); }, 100);
+    setTimeout(function () { fns.print(&quot;Main thread test. &quot; + workerName); }, 100);
     setTimeout(function () { fns.shutdown(); }, 10000);
 }
 else {
@@ -136,18 +132,15 @@ else {
     if (wt.workerData === 'client') {
         if (ipcPort) {
             var fns = ipc.netInterface(exports, ipcPort);
-            setTimeout(function () { fns.print("Client test. " + workerName); }, 100);
+            setTimeout(function () { fns.print(&quot;Client test. &quot; + workerName); }, 100);
         }
     }
 }
 
 process.on('exit', function () { console.log('Exit: ' + workerName); });
-```
-
-### Worker
-
-```js
-'use strict';
+</code></pre>
+<h3 id="worker">Worker</h3>
+<pre><code class="language-js">'use strict';
 var wt = require('worker_threads');
 var ipc = require('ipc-fn');
 var workerName = '';
@@ -181,7 +174,7 @@ if (wt.isMainThread) {
     var worker = new wt.Worker('./test_worker.js');
     var methods = ipc.workerInterface(exports, worker);
 
-    setTimeout(function () { methods.print("Main thread test. " + workerName); }, 100);
+    setTimeout(function () { methods.print(&quot;Main thread test. &quot; + workerName); }, 100);
     setTimeout(function () { methods.shutdown(); }, 10000);
 }
 else {
@@ -196,12 +189,9 @@ else {
 }
 
 process.on('exit', function () { console.log('Exit: ' + workerName); });
-```
-
-### Broadcast Channel
-
-```js
-'use strict';
+</code></pre>
+<h3 id="broadcast-channel">Broadcast Channel</h3>
+<pre><code class="language-js">'use strict';
 var wt = require('worker_threads');
 var ipc = require('ipc-fn');
 var broadcastChannelName = 'test_broadcast';
@@ -241,7 +231,7 @@ if (wt.isMainThread) {
     var worker1 = new wt.Worker('./test_broadcast.js');
     var worker2 = new wt.Worker('./test_broadcast.js');
 
-    setTimeout(function () { bc.print("Main thread test. " + workerName); }, 100);
+    setTimeout(function () { bc.print(&quot;Main thread test. &quot; + workerName); }, 100);
     setTimeout(function () {
         bc.shutdown();
         setTimeout(function () { process.exit(); }, 100);
@@ -256,16 +246,13 @@ else {
     });
 
     var bc = ipc.broadcast(exports, broadcastChannelName);
-    setTimeout(function () { bc.print("Client test. " + workerName); }, 100);
+    setTimeout(function () { bc.print(&quot;Client test. &quot; + workerName); }, 100);
 }
 
 process.on('exit', function () { console.log('Exit: ' + workerName); });
-```
-
-### Non-blocking web server
-
-```js
-'use strict';
+</code></pre>
+<h3 id="non-blocking-web-server">Non-blocking web server</h3>
+<pre><code class="language-js">'use strict';
 //require('log-report');
 var http = require('http');
 var Url = require('url');
@@ -285,7 +272,7 @@ exports.isPrime = function isPrime(number, callback) {
     let startTime = new Date();
     let endTime = new Date();
     let isPrime = true;
-    for (let i = 3; i < number; i++) {
+    for (let i = 3; i &lt; number; i++) {
         //it is not a prime break the loop,
         // see how long it took
         if (number % i === 0) {
@@ -298,9 +285,9 @@ exports.isPrime = function isPrime(number, callback) {
     if (isPrime) endTime = new Date();
 
     callback({
-        "number": number,
-        "isPrime": isPrime,
-        "time": endTime.getTime() - startTime.getTime()
+        &quot;number&quot;: number,
+        &quot;isPrime&quot;: isPrime,
+        &quot;time&quot;: endTime.getTime() - startTime.getTime()
     });
 
 }
@@ -333,12 +320,11 @@ http.createServer(function (req, res) {
 openBrowser(2367949); //(16 ms)
 openBrowser(93686687); //(500 ms)
 openBrowser(936868033); //(4 seconds)
-```
-
-## License
-
-[MIT](LICENSE)
-
-Copyright (c) 2021 Manuel L&otilde;hmus <manuel@hauss.ee>
+</code></pre>
+<h2 id="license">License</h2>
+<p><a href="LICENSE">MIT</a></p>
+<p>Copyright (c) 2021 Manuel Lõhmus <a href="mailto:manuel@hauss.ee">manuel@hauss.ee</a></p>
 
 
+</body>
+</html>

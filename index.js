@@ -76,7 +76,7 @@ function netBackground(methods, ipcPort, hostname = 'localhost') {
         })
         .listen(ipcPort, hostname, function () {
 
-            if (isDebug) { console.log("File lock IPC service port:" + ipcPort + " pid:" + process.pid); }
+            if (isDebug) { console.log("IPC service hostname:" + hostname + " port:" + ipcPort + " pid:" + process.pid); }
         });
 }
 exports.netBackground = netBackground;
@@ -303,7 +303,7 @@ function workerBackground(methods) {
                 });
 
                 var result = method.apply(null, msgObj.argArr);
-                if (result) { sender(JSON.stringify({ result: result })); }
+                if (result) { parentPort.postMessage(JSON.stringify({ result: result })); }
             }
 
             else { throw new Error("The '" + msgObj.key + "' is undefined."); }

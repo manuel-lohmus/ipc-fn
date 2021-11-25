@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>6ea09465-11d7-4206-ab0f-b6e5a163a643</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>test_broadcast.js</StartupFile>
+    <StartupFile>test_non-blocking web server.js</StartupFile>
     <StartWebBrowser>False</StartWebBrowser>
     <SearchPath>
     </SearchPath>
@@ -29,12 +29,17 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="bundleconfig.json" />
+    <Content Include="browser.js" />
     <Content Include="child.js" />
     <Content Include="index.js" />
     <Content Include="LICENSE" />
     <Content Include="log\error.log" />
     <Content Include="log\stdout.log" />
     <Content Include="package.json" />
+    <Content Include="README.html">
+      <SubType>Content</SubType>
+      <DependentUpon>README.md</DependentUpon>
+    </Content>
     <Content Include="README.md" />
     <Content Include="test_broadcast.js" />
     <Content Include="test_child.js" />

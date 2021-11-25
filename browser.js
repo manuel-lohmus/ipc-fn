@@ -1,0 +1,1 @@
+throw new Error("'ipc-fn' does not work in the browser.");
